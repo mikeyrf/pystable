@@ -8,7 +8,7 @@ authors = [
 ]
 license = "GPL-3.0-only"
 readme = "README.md"
-repository = "https://github.com/overlay-market/pystable"
+repository = "https://github.com/mikeyrf/pystable"
 keywords = ['alpha stable', 'distribution', 'statistics', 'probability']
 
 packages = [{include = "pystable"}]
