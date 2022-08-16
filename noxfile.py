@@ -5,12 +5,14 @@ import nox
 def tests(session):
     session.install('poetry')
     session.run('poetry', 'install')
-    session.run('coverage', 'run', '-m', 'pytest')
-    session.run('coverage', 'report')
+    session.run('poetry', 'build')
+    session.run('poetry', 'run', 'coverage', 'run', '-m', 'pytest', '-v')
+    session.run('poetry', 'run', 'coverage', 'report')
 
 
 @nox.session
 def lint(session):
     session.install('poetry')
     session.run('poetry', 'install')
-    session.run('flake8', 'pystable', 'tests')
+    session.run('poetry', 'build')
+    session.run('poetry', 'run', 'flake8', 'pystable', 'tests')
