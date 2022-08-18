@@ -6,7 +6,7 @@ def tests(session):
     session.install('poetry')
     session.run('poetry', 'install')
     session.run('poetry', 'build')
-    session.run('poetry', 'run', 'coverage', 'run', '-m', 'pytest', '-v')
+    session.run('poetry', 'run', 'coverage', 'run', '-m', 'pytest', '-v', '-s')
     session.run('poetry', 'run', 'coverage', 'report')
 
 

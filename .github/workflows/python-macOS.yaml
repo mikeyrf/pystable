@@ -21,9 +21,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install gsl on macOS
         run: brew install gsl
-      - name: Check gsl is in opt
+      - name: Check gsl is in opt # TODO: remove
         run: ls /usr/local/opt/
-      - name: Check gsl installation
+      - name: Check gsl installation # TODO: remove
         run: ls /usr/local/opt/gsl/lib
       - name: Install Poetry
         uses: abatilo/actions-poetry@v2.0.0

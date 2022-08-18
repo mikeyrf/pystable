@@ -3,7 +3,8 @@ import pathlib
 import shutil
 
 from distutils.command.build_ext import build_ext
-from distutils.core import setup, Extension
+from distutils.core import Distribution
+from distutils.core import Extension
 
 
 libstable_module = Extension('libstable',
@@ -23,6 +24,7 @@ libstable_module = Extension('libstable',
 
 
 # SEE: https://github.com/python-poetry/poetry/issues/11
+# SEE: https://github.com/sdispater/pendulum/blob/master/build.py
 class ExtensionBuild(build_ext):
     def run(self):
         build_ext.run(self)
@@ -46,4 +48,20 @@ class ExtensionBuild(build_ext):
             os.chmod(dest, mode)
 
 
-setup(ext_modules=[libstable_module], cmdclass=dict(build_ext=ExtensionBuild))
+def build(setup_kwargs):
+    """
+    This function is mandatory in order to build the extensions.
+    """
+    distribution = Distribution(
+        {"name": "pystable", "ext_modules": [libstable_module]})
+    distribution.package_dir = "pystable"
+
+    cmd = ExtensionBuild(distribution)
+    cmd.ensure_finalized()
+    cmd.run()
+
+    return setup_kwargs
+
+
+if __name__ == "__main__":
+    build({})
